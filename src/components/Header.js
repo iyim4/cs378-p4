@@ -1,7 +1,7 @@
 import React from 'react';
 
 // This is a functional component that represents the menu header
-const Header = ({ title }) => {
+const Header = ({ title, tagline }) => {
   return (
     <div>
       <div class="row align-items-center container-fluid">
@@ -12,7 +12,7 @@ const Header = ({ title }) => {
           <h1 class="text-center display-1">{ title }</h1>
         </div>
       </div>
-      <p class="text-center tagline">Delicious Japanese Cuisine!</p>
+      <p class="text-center tagline">{tagline}</p>
     </div>
   );
 };
