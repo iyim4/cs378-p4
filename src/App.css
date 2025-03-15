@@ -2,7 +2,21 @@
   Style your elements by creating CSS classes here.
   Below, you can see an example of a class called "menu" that changes the color of the text to blue. Modify according to your needs.
 */
-
+.header {
+  padding: 2%;
+  vertical-align: middle;
+}
+.tagline {
+  color: green;
+  font-family: Brush Script MT, Brush Script Std, cursive;
+}
+.entry {
+  padding: 2%;
+}
 .menu {
-  color: blue;
+  padding: 2%;
+}
+.cart-button {
+  background: none;
+  border: none;
 }

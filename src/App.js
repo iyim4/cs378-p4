@@ -1,9 +1,14 @@
 import './App.css';
 import MenuItem from './components/MenuItem';
+import Header from './components/Header';
+import { useState } from 'react';
 
-// import 'bootstrap/dist/css/bootstrap.min.css'; // This imports bootstrap css styles. You can use bootstrap or your own classes by using the className attribute in your elements.
+import 'bootstrap/dist/css/bootstrap.min.css'; 
+// This imports bootstrap css styles. You can use bootstrap or your own classes 
+// by using the className attribute in your elements.
 
-// Menu data. An array of objects where each object represents a menu item. Each menu item has an id, title, description, image name, and price.
+// Menu data. An array of objects where each object represents a menu item. 
+// Each menu item has an id, title, description, image name, and price.
 // You can use the image name to get the image from the images folder.
 const menuItems = [
   {
@@ -77,18 +82,57 @@ const menuItems = [
     price: 9.99,
   }
 ];
-
+let initialItemCounts = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 function App() {
+  const [subtotal, setSubtotal] = useState(0);
+  const [itemCounts, setItemCounts] = useState(initialItemCounts);
+
   return (
     <div>
-      <h1>Menu</h1>
+      <Header title="Japanese Menu" />
       <div className="menu">
-        {/* Display menu items dynamicaly here by iterating over the provided menuItems */}
-        <MenuItem title={menuItems[0].title} /> {/* Example for how to use a component */}
+        {menuItems.map((item) => (
+          <MenuItem item={item} itemCounts={itemCounts} setItemCounts={setItemCounts} subtotal={subtotal} setSubtotal={setSubtotal} />
+        ))}
+      </div>
+      <RenderSubtotal subtotal={subtotal} setSubtotal={setSubtotal} itemCounts={itemCounts} setItemCounts={setItemCounts} /> 
+    </div>
+  );
+}
+
+function RenderSubtotal({ subtotal, setSubtotal, itemCounts, setItemCounts }) {
+  return (
+    <div class="row">
+      <div class="col-6">
+        <p>Subtotal: ${subtotal.toFixed(2)}</p>
+      </div>
+      <div class="col-3">
+        <button type="button" class="btn btn-primary btn-sm" onClick={() => placeOrder(itemCounts)}>Order</button>
+      </div>
+      <div class="col-3">
+        <button type="button" class="btn btn-primary btn-sm" onClick={() => clearAll(setSubtotal, setItemCounts)}>Clear All</button>
       </div>
     </div>
   );
+}
+
+function placeOrder (itemCounts) {
+  let message = "Order Placed!\n";
+  itemCounts.forEach((count, index) => {
+    if (count > 0) {
+      message += (count + " " + menuItems[index].title + " ");
+    }
+  });
+  if (message.length === 14) {
+    message = "No items in cart";
+  }
+  return alert(message);
+}
+
+function clearAll (setSubtotal, setItemCounts) {
+  setItemCounts(initialItemCounts);
+  setSubtotal(0);
 }
 
 export default App;
