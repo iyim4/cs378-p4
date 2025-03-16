@@ -3,6 +3,13 @@
   Below, you can see an example of a class called "menu" that changes the color of the text to blue. Modify according to your needs.
 */
 
+h1 {
+  font-family: 'Lucida Handwriting', cursive, serif;
+  font-weight: bold;
+}
+h2 {
+  font-family: 'Lucida Handwriting', cursive, serif;
+}
 .header {
   padding: 2%;
   vertical-align: middle;
@@ -13,7 +20,7 @@
 }
 .tagline {
   color: darkred;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: 'Lucida Handwriting', cursive, serif;
   font-weight: bold;
 }
 .entry {
@@ -49,4 +56,12 @@
 .banner, img{
   width:100%;
   height: 100%;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+}
+.buttons-con {
+  padding: 2%;
 }

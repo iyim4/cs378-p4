@@ -79,15 +79,15 @@ function filterData(data, query) {
 
 function Buttons({ setCurUrl }) {
   return ( 
-    <div class="row justify-content-center align-items-center">
-      <div class="col-4 d-flex justify-content-center">
-        <button class="btn btn-secondary vorange" onClick={() => setCurUrl(capUrl)}>Orange+</button>
+    <div class="row center buttons-con">
+      <div class="col-4 d-flex center">
+        <button class="btn btn-secondary" onClick={() => setCurUrl(capUrl)}>Orange+</button>
       </div>
-      <div class="col-4 d-flex justify-content-center">
-        <button class="btn btn-secondary vyellow" onClick={() => setCurUrl(elevUrl)}>Yellow+</button>
+      <div class="col-4 d-flex center">
+        <button class="btn btn-secondary" onClick={() => setCurUrl(elevUrl)}>Yellow+</button>
       </div>
-      <div class="col-4 d-flex justify-content-center">
-        <button class="btn btn-secondary vunknown" onClick={() => setCurUrl(allUrl)}>All</button>
+      <div class="col-4 d-flex center">
+        <button class="btn btn-secondary" onClick={() => setCurUrl(allUrl)}>All</button>
       </div>            
     </div>
   );
