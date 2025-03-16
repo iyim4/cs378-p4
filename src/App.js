@@ -23,17 +23,8 @@ function App() {
   return (
     <div>
       <Header title="Volcano Watch" tagline="Find volcano statuses" />
-      <div class="row justify-content-center align-items-center">
-        <div class="col-4 d-flex justify-content-center">
-          <button class="btn btn-secondary vorange" onClick={() => setCurUrl(capUrl)}>Orange+</button>
-        </div>
-        <div class="col-4 d-flex justify-content-center">
-          <button class="btn btn-secondary vyellow" onClick={() => setCurUrl(elevUrl)}>Yellow+</button>
-        </div>
-        <div class="col-4 d-flex justify-content-center">
-          <button class="btn btn-secondary vunknown" onClick={() => setCurUrl(allUrl)}>All</button>
-        </div>            
-      </div>
+      <Buttons setCurUrl={setCurUrl} />
+      {/* insert here */}
       <div className="list">
         {data.map((vdata) => (
           <VolcanoData vdata={vdata} />
@@ -50,6 +41,7 @@ function Footer() {
   return (
     <div class="footer">
       <p>Volcano data from the <a href="https://volcanoes.usgs.gov/hans-public/api/volcano/">U.S. Geological Survey</a>.</p>
+      <img src="./images/Footer_Banner.jpg" alt={"Volcano Watch footer. Decorative."} class="banner" />
     </div>
   );
 }
@@ -65,15 +57,20 @@ async function fetchData(url, setData) {
   }
 }
 
-async function getData(url) {
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
-  } catch (err) {
-    console.error("Error fetching data: ", err);
-    return [];
-  }
+function Buttons( setCurUrl ) {
+  return (
+    <div class="row justify-content-center align-items-center">
+      <div class="col-4 d-flex justify-content-center">
+        <button class="btn btn-secondary vorange" onClick={() => setCurUrl(capUrl)}>Orange+</button>
+      </div>
+      <div class="col-4 d-flex justify-content-center">
+        <button class="btn btn-secondary vyellow" onClick={() => setCurUrl(elevUrl)}>Yellow+</button>
+      </div>
+      <div class="col-4 d-flex justify-content-center">
+        <button class="btn btn-secondary vunknown" onClick={() => setCurUrl(allUrl)}>All</button>
+      </div>            
+    </div>
+  );
 }
 
 export default App;
