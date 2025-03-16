@@ -10,7 +10,12 @@ const VolcanoData = ({ vdata }) => {
   // set the volcano name
   var vname = "ERROR";
   if ('volcano_name' in vdata) {
-    vname = vdata.volcano_name + " Volcano";
+    var append = " Volcano";
+    if (vdata.volcano_name.toLowerCase().includes("volcan")) {
+      append = "";
+    }
+
+    vname = vdata.volcano_name + append;
   } else if ('volcano_name_appended' in vdata) {
     vname = vdata.volcano_name_appended;
   }

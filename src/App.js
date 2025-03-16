@@ -15,27 +15,37 @@ const allUrl =  "https://volcanoes.usgs.gov/hans-public/api/volcano/getMonitored
 function App() {
   const [data, setData] = useState([]);
   const [curUrl, setCurUrl] = useState(capUrl);
+  const [search, setSearch] = useState('');
+  const [filteredData, setFilteredData] = useState([]);
 
+  // get volcano data
   useEffect(() => {
     fetchData(curUrl, setData);
   }, [curUrl]);
+
+  // filter if searched
+  useEffect(() => {
+    setFilteredData(filterData(data, search));
+  }, [search, data]);
 
   return (
     <div>
       <Header title="Volcano Watch" tagline="Find volcano statuses" />
       <Buttons setCurUrl={setCurUrl} />
-      {/* insert here */}
+      <Search setSearch={setSearch} />
       <div className="list">
-        {data.map((vdata) => (
-          <VolcanoData vdata={vdata} />
-        ))}
+        {filteredData.length > 0 ? (
+          filteredData.map((vdata) => (
+            <VolcanoData key={vdata.id} vdata={vdata} />
+          ))
+        ) : (
+          <p>Couldn't find any volcanoes from "{search}"</p>
+        )}
       </div>
       <Footer />
     </div>
   );
 }
-
-
 
 function Footer() {
   return (
@@ -57,6 +67,16 @@ async function fetchData(url, setData) {
   }
 }
 
+function filterData(data, query) {
+  if (query) {
+    return data.filter(vdata => 
+      vdata.obs_fullname.toLowerCase().includes(query.toLowerCase()) ||
+      vdata.volcano_name.toLowerCase().includes(query.toLowerCase())
+    );
+  }
+  return data;
+}
+
 function Buttons({ setCurUrl }) {
   return ( 
     <div class="row justify-content-center align-items-center">
@@ -72,5 +92,18 @@ function Buttons({ setCurUrl }) {
     </div>
   );
 }
+
+function Search ({ setSearch }) {
+  return (
+    <div class="search justify-content-center">
+        <input 
+          type="text" 
+          placeholder="Search by observatory or volcano name" 
+          class="form-control"
+          onChange={(event) => setSearch(event.target.value)} 
+          />
+    </div>
+  );
+};
 
 export default App;
