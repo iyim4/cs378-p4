@@ -2,17 +2,48 @@
   Style your elements by creating CSS classes here.
   Below, you can see an example of a class called "menu" that changes the color of the text to blue. Modify according to your needs.
 */
+
 .header {
   padding: 2%;
   vertical-align: middle;
 }
+.footer {
+  padding: 2%;
+  vertical-align: middle;
+}
 .tagline {
-  color: green;
-  font-family: Brush Script MT, Brush Script Std, cursive;
+  color: darkred;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: bold;
 }
 .entry {
   padding: 2%;
 }
 .list {
   padding: 2%;
+}
+
+.vgreen {
+  color: green;
+  font-weight: bold;
+}
+
+.vyellow {
+  color: gold;
+  font-weight: bold;
+}
+
+.vorange {
+  color: orange;
+  font-weight: bold;
+}
+
+.vred {
+  color: red;
+  font-weight: bold;
+}
+
+.banner, img{
+  width:100%;
+  height: 100%;
 }

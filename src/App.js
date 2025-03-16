@@ -14,14 +14,26 @@ const allUrl =  "https://volcanoes.usgs.gov/hans-public/api/volcano/getMonitored
 
 function App() {
   const [data, setData] = useState([]);
+  const [curUrl, setCurUrl] = useState(capUrl);
 
   useEffect(() => {
-    fetchData(capUrl, setData);
-  }, []);
+    fetchData(curUrl, setData);
+  }, [curUrl]);
 
   return (
     <div>
       <Header title="Volcano Watch" tagline="Find volcano statuses" />
+      <div class="row justify-content-center align-items-center">
+        <div class="col-4 d-flex justify-content-center">
+          <button class="btn btn-secondary vorange" onClick={() => setCurUrl(capUrl)}>Orange+</button>
+        </div>
+        <div class="col-4 d-flex justify-content-center">
+          <button class="btn btn-secondary vyellow" onClick={() => setCurUrl(elevUrl)}>Yellow+</button>
+        </div>
+        <div class="col-4 d-flex justify-content-center">
+          <button class="btn btn-secondary vunknown" onClick={() => setCurUrl(allUrl)}>All</button>
+        </div>            
+      </div>
       <div className="list">
         {data.map((vdata) => (
           <VolcanoData vdata={vdata} />
@@ -32,10 +44,12 @@ function App() {
   );
 }
 
+
+
 function Footer() {
   return (
-    <div>
-      <p>footer</p>
+    <div class="footer">
+      <p>Volcano data from the <a href="https://volcanoes.usgs.gov/hans-public/api/volcano/">U.S. Geological Survey</a>.</p>
     </div>
   );
 }
