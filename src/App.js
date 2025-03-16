@@ -14,7 +14,7 @@ const allUrl =  "https://volcanoes.usgs.gov/hans-public/api/volcano/getMonitored
 
 function App() {
   const [data, setData] = useState([]);                 // volcano data
-  const [curUrl, setCurUrl] = useState(capUrl);         // current url
+  const [curUrl, setCurUrl] = useState(elevUrl);         // current url
   const [search, setSearch] = useState('');             // current user search
   const [filteredData, setFilteredData] = useState([]); // search-filtered data
 
@@ -89,10 +89,10 @@ function Buttons({ curUrl, setCurUrl }) {
     <div class="row center buttons-con">
       <div class="col-4 d-flex center">
         <button 
-          class={`btn ${curUrl === capUrl ? 'btn-primary' : 'btn-secondary'}`} 
-          onClick={() => setCurUrl(capUrl)}
+          class={`btn ${curUrl === allUrl ? 'btn-primary' : 'btn-secondary'}`} 
+          onClick={() => setCurUrl(allUrl)}
         >
-          Orange+
+          All
         </button>
       </div>
       <div class="col-4 d-flex center">
@@ -105,12 +105,12 @@ function Buttons({ curUrl, setCurUrl }) {
       </div>
       <div class="col-4 d-flex center">
         <button 
-          class={`btn ${curUrl === allUrl ? 'btn-primary' : 'btn-secondary'}`} 
-          onClick={() => setCurUrl(allUrl)}
+          class={`btn ${curUrl === capUrl ? 'btn-primary' : 'btn-secondary'}`} 
+          onClick={() => setCurUrl(capUrl)}
         >
-          All
+          Orange+
         </button>
-      </div>            
+      </div> 
     </div>
   );
 }

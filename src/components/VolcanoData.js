@@ -23,7 +23,7 @@ const VolcanoData = ({ vdata }) => {
   return (
     <div class="entry">
       <h2>{vname}</h2>
-      <p>{vdata.obs_fullname}, Status: {getIcon(vdata)}</p> 
+      <p>{vdata.obs_fullname}<br></br>Status: {getIcon(vdata)}</p> 
       <Description vdata={vdata} />
     </div>
   )
@@ -33,7 +33,7 @@ const VolcanoData = ({ vdata }) => {
 // uses colors and icons to decrease user gulfs
 function getIcon(vdata) {
   var level = vdata.alert_level;
-  if (level != "WARNING") {
+  if (level !== "WARNING") {
     level = level.toLowerCase();
   }
 
