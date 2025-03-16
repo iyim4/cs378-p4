@@ -22,6 +22,7 @@ h2 {
   color: darkred;
   font-family: 'Lucida Handwriting', cursive, serif;
   font-weight: bold;
+  padding: 4%;
 }
 .entry {
   padding: 2%;
