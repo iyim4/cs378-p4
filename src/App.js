@@ -39,8 +39,8 @@ function App() {
 
 function Footer() {
   return (
-    <div class="footer">
-      <p>Volcano data from the <a href="https://volcanoes.usgs.gov/hans-public/api/volcano/">U.S. Geological Survey</a>.</p>
+    <div class="align-items-center container-fluid">
+      <p class="footer">Volcano data from the <a href="https://volcanoes.usgs.gov/hans-public/api/volcano/">U.S. Geological Survey</a>.</p>
       <img src="./images/Footer_Banner.jpg" alt={"Volcano Watch footer. Decorative."} class="banner" />
     </div>
   );
