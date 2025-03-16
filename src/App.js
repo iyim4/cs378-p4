@@ -31,7 +31,7 @@ function App() {
   return (
     <div>
       <Header title="Volcano Watch" tagline="Find volcano statuses" />
-      <Buttons setCurUrl={setCurUrl} />
+      <Buttons curUrl={curUrl} setCurUrl={setCurUrl} />
       <Search setSearch={setSearch} />
       <div className="list">
         {filteredData.length > 0 ? (
@@ -77,17 +77,32 @@ function filterData(data, query) {
   return data;
 }
 
-function Buttons({ setCurUrl }) {
+function Buttons({ curUrl, setCurUrl }) {
   return ( 
-    <div class="row center buttons-con">
-      <div class="col-4 d-flex center">
-        <button class="btn btn-secondary" onClick={() => setCurUrl(capUrl)}>Orange+</button>
+    <div className="row center buttons-con">
+      <div className="col-4 d-flex center">
+        <button 
+          className={`btn ${curUrl === capUrl ? 'btn-primary' : 'btn-secondary'}`} 
+          onClick={() => setCurUrl(capUrl)}
+        >
+          Orange+
+        </button>
       </div>
-      <div class="col-4 d-flex center">
-        <button class="btn btn-secondary" onClick={() => setCurUrl(elevUrl)}>Yellow+</button>
+      <div className="col-4 d-flex center">
+        <button 
+          className={`btn ${curUrl === elevUrl ? 'btn-primary' : 'btn-secondary'}`} 
+          onClick={() => setCurUrl(elevUrl)}
+        >
+          Yellow+
+        </button>
       </div>
-      <div class="col-4 d-flex center">
-        <button class="btn btn-secondary" onClick={() => setCurUrl(allUrl)}>All</button>
+      <div className="col-4 d-flex center">
+        <button 
+          className={`btn ${curUrl === allUrl ? 'btn-primary' : 'btn-secondary'}`} 
+          onClick={() => setCurUrl(allUrl)}
+        >
+          All
+        </button>
       </div>            
     </div>
   );
