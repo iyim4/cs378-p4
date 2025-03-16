@@ -13,10 +13,10 @@ const elevUrl = "https://volcanoes.usgs.gov/hans-public/api/volcano/getElevatedV
 const allUrl =  "https://volcanoes.usgs.gov/hans-public/api/volcano/getMonitoredVolcanoes";
 
 function App() {
-  const [data, setData] = useState([]);
-  const [curUrl, setCurUrl] = useState(capUrl);
-  const [search, setSearch] = useState('');
-  const [filteredData, setFilteredData] = useState([]);
+  const [data, setData] = useState([]);                 // volcano data
+  const [curUrl, setCurUrl] = useState(capUrl);         // current url
+  const [search, setSearch] = useState('');             // current user search
+  const [filteredData, setFilteredData] = useState([]); // search-filtered data
 
   // get volcano data
   useEffect(() => {
@@ -33,12 +33,13 @@ function App() {
       <Header title="Volcano Watch" tagline="Find volcano statuses" />
       <Buttons curUrl={curUrl} setCurUrl={setCurUrl} />
       <Search setSearch={setSearch} />
-      <div className="list">
+      <div class="list">
         {filteredData.length > 0 ? (
           filteredData.map((vdata) => (
             <VolcanoData key={vdata.id} vdata={vdata} />
           ))
         ) : (
+          // error handling
           <p>Couldn't find any volcanoes from "{search}"</p>
         )}
       </div>
@@ -47,6 +48,7 @@ function App() {
   );
 }
 
+// renders the credits and footer banner 
 function Footer() {
   return (
     <div class="align-items-center container-fluid">
@@ -56,6 +58,7 @@ function Footer() {
   );
 }
 
+// gets data from the API
 async function fetchData(url, setData) {
   try {
     const response = await fetch(url);
@@ -67,38 +70,42 @@ async function fetchData(url, setData) {
   }
 }
 
+// filters data from the search query if needed
 function filterData(data, query) {
   if (query) {
-    return data.filter(vdata => 
-      vdata.obs_fullname.toLowerCase().includes(query.toLowerCase()) ||
-      vdata.volcano_name.toLowerCase().includes(query.toLowerCase())
-    );
+    return data.filter(vdata => {
+      const obsMatch = vdata.obs_fullname.toLowerCase().includes(query.toLowerCase());
+      const nameMatch = vdata.volcano_name ? vdata.volcano_name.toLowerCase().includes(query.toLowerCase()) : false;
+      const appendedNameMatch = vdata.volcano_name_appended ? vdata.volcano_name_appended.toLowerCase().includes(query.toLowerCase()) : false;
+      return obsMatch || nameMatch || appendedNameMatch;
+    });
   }
   return data;
 }
 
+// renders buttons (orange+ yellow+ all) and updates the current url accordingly
 function Buttons({ curUrl, setCurUrl }) {
   return ( 
-    <div className="row center buttons-con">
-      <div className="col-4 d-flex center">
+    <div class="row center buttons-con">
+      <div class="col-4 d-flex center">
         <button 
-          className={`btn ${curUrl === capUrl ? 'btn-primary' : 'btn-secondary'}`} 
+          class={`btn ${curUrl === capUrl ? 'btn-primary' : 'btn-secondary'}`} 
           onClick={() => setCurUrl(capUrl)}
         >
           Orange+
         </button>
       </div>
-      <div className="col-4 d-flex center">
+      <div class="col-4 d-flex center">
         <button 
-          className={`btn ${curUrl === elevUrl ? 'btn-primary' : 'btn-secondary'}`} 
+          class={`btn ${curUrl === elevUrl ? 'btn-primary' : 'btn-secondary'}`} 
           onClick={() => setCurUrl(elevUrl)}
         >
           Yellow+
         </button>
       </div>
-      <div className="col-4 d-flex center">
+      <div class="col-4 d-flex center">
         <button 
-          className={`btn ${curUrl === allUrl ? 'btn-primary' : 'btn-secondary'}`} 
+          class={`btn ${curUrl === allUrl ? 'btn-primary' : 'btn-secondary'}`} 
           onClick={() => setCurUrl(allUrl)}
         >
           All
@@ -108,6 +115,7 @@ function Buttons({ curUrl, setCurUrl }) {
   );
 }
 
+// renders the search box and updates the state variable
 function Search ({ setSearch }) {
   return (
     <div class="search justify-content-center">

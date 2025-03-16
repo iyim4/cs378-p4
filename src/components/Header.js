@@ -1,6 +1,6 @@
 import React from 'react';
 
-// This is a functional component that represents the menu header
+// renders the header banner image and description
 const Header = ({ title, tagline }) => {
   return (
     <div class="align-items-center container-fluid">

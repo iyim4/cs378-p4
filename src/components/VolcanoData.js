@@ -3,7 +3,7 @@ import { BsTriangle, BsCheckCircleFill, BsExclamationTriangleFill,
     BsExclamationSquareFill, BsExclamationOctagonFill } from "react-icons/bs";
 
 // This is a functional component that represents a single volcano
-// it renders the name, observatory, alert level, and synopsis
+// it renders the name, observatory, alert level, and synopsis (if orange+)
 // vdata is the data entry of ONE volcano
 const VolcanoData = ({ vdata }) => {
 
@@ -14,7 +14,6 @@ const VolcanoData = ({ vdata }) => {
     if (vdata.volcano_name.toLowerCase().includes("volcan")) {
       append = "";
     }
-
     vname = vdata.volcano_name + append;
   } else if ('volcano_name_appended' in vdata) {
     vname = vdata.volcano_name_appended;
@@ -22,7 +21,7 @@ const VolcanoData = ({ vdata }) => {
 
   // render volcano entry
   return (
-    <div className="entry">
+    <div class="entry">
       <h2>{vname}</h2>
       <p>{vdata.obs_fullname}, Status: {getIcon(vdata)}</p> 
       <Description vdata={vdata} />
@@ -30,6 +29,8 @@ const VolcanoData = ({ vdata }) => {
   )
 };
 
+// renders the relevant icon corresponding to the alert level
+// uses colors and icons to decrease user gulfs
 function getIcon(vdata) {
   var level = vdata.alert_level;
   if (level != "WARNING") {
@@ -39,37 +40,38 @@ function getIcon(vdata) {
   switch(vdata.color_code) {
     case "GREEN":
       return (
-        <span className="vgreen">
-          <BsCheckCircleFill className="vgreen" /> {level}
+        <span class="vgreen">
+          <BsCheckCircleFill class="vgreen" /> {level}
         </span>
       );
     case "YELLOW":
       return (
-        <span className="vyellow">
-          <BsExclamationTriangleFill className="vyellow" /> {level}
+        <span class="vyellow">
+          <BsExclamationTriangleFill class="vyellow" /> {level}
         </span>
       );
     case "ORANGE":
       return (
-        <span className="vorange">
-          <BsExclamationSquareFill className="vorange" /> {level}
+        <span class="vorange">
+          <BsExclamationSquareFill class="vorange" /> {level}
         </span>
       );
     case "RED":
       return (
-        <span className="vred">
-          <BsExclamationOctagonFill className="vred" /> {level}
+        <span class="vred">
+          <BsExclamationOctagonFill class="vred" /> {level}
         </span>
       );
     default:
       return (
-        <span className="vunknown">
+        <span class="vunknown">
           <BsTriangle /> unknown (not enough information to determine)
         </span>
       );
   }
 }
 
+// loads the description if it exists (only for orange+)
 function Description ({ vdata }) {
   if ('synopsis' in vdata) {
     return <p>Description: {vdata.synopsis}</p>;
