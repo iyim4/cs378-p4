@@ -57,8 +57,8 @@ async function fetchData(url, setData) {
   }
 }
 
-function Buttons( setCurUrl ) {
-  return (
+function Buttons({ setCurUrl }) {
+  return ( 
     <div class="row justify-content-center align-items-center">
       <div class="col-4 d-flex justify-content-center">
         <button class="btn btn-secondary vorange" onClick={() => setCurUrl(capUrl)}>Orange+</button>
